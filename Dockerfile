@@ -1,6 +1,8 @@
 FROM ubuntu:20.04
 MAINTAINER atudomain
 
+USER root
+
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
@@ -15,7 +17,8 @@ RUN apt-get -y install sudo
 
 RUN apt-get -y install openjdk-11-jdk
 RUN apt-get -y install gerrit=3.2.3-1 && apt-mark hold gerrit
-RUN mv /var/gerrit /var/gerrit-tmp
+RUN mv /var/gerrit     /var/gerrit-tmp
+RUN chown -R root:root /var/gerrit-tmp
 
 EXPOSE 29418 8080
 
